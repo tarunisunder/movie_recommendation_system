@@ -7,7 +7,6 @@ from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_
 import streamlit as st
 import inspect
 import seaborn as sns
-from seaborn import histplot
 import sys
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
@@ -56,8 +55,7 @@ def data_overview():
   st.dataframe(movie_rating.head())
 
   plt.figure(figsize=(10, 4))
-  st.write(ratings['rating'].head())
-  histplot(ratings['rating'], bins=10)
+  sns.histplot(ratings['rating'].tolist(), bins=10)
   #plt.hist(ratings['rating'], bins=10)
   plt.title('Distribution of Ratings')
   plt.xlabel('Ratings')
