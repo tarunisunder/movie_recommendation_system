@@ -7,7 +7,7 @@ from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_
 import streamlit as st
 import inspect
 import seaborn as sns
-import requests
+import sys
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 
@@ -20,15 +20,8 @@ ratings = pd.read_csv(ratings_data)
 
 
 def data_overview():
+  st.write("Python Version:", sys.version)
 
-  try:
-    response = requests.get("https://www.google.com")
-    if response.status_code == 200:
-        st.success("Internet access is available.")
-    else:
-        st.warning("Internet access might be limited or unavailable.")
-  except Exception as e:
-    st.error(f"An error occurred: {e}")
 
 
   st.title('Movie Recommendation System')
