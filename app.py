@@ -21,9 +21,6 @@ ratings = pd.read_csv(ratings_data)
 
 
 def data_overview():
-  st.write("Python Version:", sys.version)
-
-
 
   st.title('Movie Recommendation System')
   st.subheader('Taruni Sunder')
@@ -59,7 +56,8 @@ def data_overview():
   st.dataframe(movie_rating.head())
 
   plt.figure(figsize=(10, 4))
-  sns.histplot(ratings['rating'], bins=10)
+  st.write(ratings['rating'].head())
+  histplot(ratings['rating'], bins=10)
   #plt.hist(ratings['rating'], bins=10)
   plt.title('Distribution of Ratings')
   plt.xlabel('Ratings')
