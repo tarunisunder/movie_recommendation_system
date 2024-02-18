@@ -5,3 +5,4 @@ matplotlib
 scikit-learn
 streamlit==1.31.1
 seaborn
+requests
