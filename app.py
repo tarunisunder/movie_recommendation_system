@@ -188,12 +188,12 @@ def recommendation_main():
 
     st.markdown(f"**The precision is {precision}**")
     st.markdown(f"**The recall is {recall}**")
-    plt.figure(figsize=(4, 2))
-    sns.heatmap(conf_matrix, annot=True, fmt="d", cmap="Blues", linewidths=.5)
-    plt.xlabel("Predicted")
-    plt.ylabel("Actual")
-    plt.title("Confusion Matrix")
-    st.pyplot()
+    # plt.figure(figsize=(4, 2))
+    # sns.heatmap(conf_matrix, annot=True, fmt="d", cmap="Blues", linewidths=.5)
+    # plt.xlabel("Predicted")
+    # plt.ylabel("Actual")
+    # plt.title("Confusion Matrix")
+    # st.pyplot()
 
 
 
