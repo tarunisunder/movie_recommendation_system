@@ -1,3 +1,4 @@
+%%writefile app.py
 from surprise import Dataset, Reader, KNNBasic, accuracy
 from surprise.model_selection import train_test_split
 import pandas as pd
@@ -10,10 +11,10 @@ import seaborn as sns
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 
-# from google.colab import drive
+#from google.colab import drive
 
-# movies_data =  '/content/drive/MyDrive/tens_challenge/movies.csv'
-# ratings_data =  '/content/drive/MyDrive/tens_challenge/ratings.csv'
+#movies_data =  '/content/drive/MyDrive/tens_challenge/movies.csv'
+#ratings_data =  '/content/drive/MyDrive/tens_challenge/ratings.csv'
 
 
 movies_data =  'https://raw.githubusercontent.com/tarunisunder/movie_recommendation_system/main/movies.csv'
@@ -25,6 +26,9 @@ ratings = pd.read_csv(ratings_data)
 
 
 def data_overview():
+
+  st.title('Movie Recommendation System')
+  st.subheader('Taruni Sunder')
   st.title('Data Overview')
   st.header('Movies Data')
   st.dataframe(movies.head())
@@ -99,7 +103,7 @@ def create_train_test():
   return train_set, test_set,train_df, test_df
 
 
-  
+
 def display_code_widget():
   st.title('Train Test Split Code')
   function_code = inspect.getsource(create_train_test)
@@ -117,13 +121,13 @@ def error_analysis(test_df,user_predicted_list,selected_user_id,threshold):
   user_actual_rating = test_df[(test_df['userId'] == selected_user_id)  ]
   user_actual_rating = pd.merge(user_actual_rating, user_predicted_df , on =['movieId'])
   user_actual_rating['diff'] = abs(user_actual_rating['rating'] - user_actual_rating['predicted_rating'])
-  avg_error = user_actual_rating['diff'].sum() / len(user_actual_rating) 
+  avg_error = user_actual_rating['diff'].sum() / len(user_actual_rating)
 
   user_actual_rating['ratingBool'] = (user_actual_rating['rating'] > threshold).astype(int)
   user_actual_rating['predictedBool'] = (user_actual_rating['predicted_rating'] > threshold).astype(int)
 
   actual =user_actual_rating['ratingBool']
-  predicted = user_actual_rating['predictedBool']  
+  predicted = user_actual_rating['predictedBool']
 
   conf_matrix = confusion_matrix(user_actual_rating['ratingBool'] , user_actual_rating['predictedBool'] , labels = [False , True])
 
@@ -179,7 +183,7 @@ def recommendation_main():
       #pred_rating = round(pred_rating,2)
       st.markdown(f"**{idx}. Movie Name: {movie_info[0][0]}, Predicted Rating: {pred_rating}**")
       idx+=1
-      
+
     st.header(f'Performance Analysis for {selected_user_id}')
 
     threshold = st.number_input("Set the rating threshold for a good movie:", min_value=1, max_value=5, value=3, step=1)
