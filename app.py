@@ -7,6 +7,7 @@ from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_
 import streamlit as st
 import inspect
 import seaborn as sns
+import requests
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 
