@@ -216,21 +216,26 @@ def authenticate(username, password):
     return username == valid_username and password == valid_password
 
 def login():
-    st.title("Login Page")
-    username = st.text_input("Username:")
-    password = st.text_input("Password:", type="password")
-    login_button = st.button("Login")
+    if 'authenticated' not in st.session_state:
+        st.session_state.authenticated = False
 
-    if login_button:
-        if authenticate(username, password):
-            st.success("Login successful!")
-            return True
-        else:
-            st.error("Invalid username or password. Please try again.")
-    return False
+    if not st.session_state.authenticated:
+        st.title("Login Page")
+        username = st.text_input("Username:")
+        password = st.text_input("Password:", type="password")
+        login_button = st.button("Login")
+
+        if login_button:
+            if authenticate(username, password):
+                st.success("Login successful!")
+                st.session_state.authenticated = True
+            else:
+                st.error("Invalid username or password. Please try again.")
+  
 
 def main() :
-  if login():
+  login():
+  if st.session_state.authenticated:
       page = st.sidebar.selectbox("Select a page", ["Data", "Train Test", "Recommendation Abstract", "Recommendation Demo"])
       if page == "Data":
           data_overview()
