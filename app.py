@@ -73,17 +73,23 @@ def create_train_test():
   total_dict = ratings['userId'].value_counts().to_dict()
   train_dict = {key: value / 2 for key, value in total_dict.items()}
 
-  train_df = pd.DataFrame(columns = ['userId', 'movieId', 'rating'])
-  test_df = pd.DataFrame(columns = ['userId', 'movieId', 'rating'])
+  # train_df = pd.DataFrame(columns = ['userId', 'movieId', 'rating'])
+  # test_df = pd.DataFrame(columns = ['userId', 'movieId', 'rating'])
+
+  train_df_list = []
+  test_df_list = []
 
   for (k,v) in train_dict.items() :
     temp_df = ratings[ratings['userId'] == k].iloc[:,:3].head(int(v))
     temp2_df = ratings[ratings['userId'] == k].iloc[:,:3].tail(int(v))
-    st.dataframe(temp_df.head())
-    train_df= train_df.append(temp_df,ignore_index=True)
-    st.write("After append")
-    st.dataframe(train_df.head())
-    test_df = test_df.append(temp2_df, ignore_index = True)
+    # train_df= train_df.append(temp_df,ignore_index=True)
+    # test_df = test_df.append(temp2_df, ignore_index = True)
+
+    train_df_list.append(temp_df)
+    test_df_list.append(temp2_df)
+
+  train_df = pd.concat(train_df_list, ignore_index=True)
+  test_df = pd.concat(test_df_list, ignore_index=True)
 
 
   reader = Reader(rating_scale=(1, 5))
@@ -157,51 +163,51 @@ def recommendation_main():
     st.dataframe(selected_user_movies)
 
     sim_options = {'name': 'cosine', 'user_based': True}
-    # model = KNNBasic(sim_options=sim_options)
+    model = KNNBasic(sim_options=sim_options)
 
-    # model.fit(train_set)
+    model.fit(train_set)
 
 
-    # predictions = model.test(test_set)
+    predictions = model.test(test_set)
 
-    # predicted_list = []
-    # for prediction in predictions:
-    #     actual_rating = prediction.r_ui
-    #     predicted_rating = prediction.est
-    #     user_id = prediction.uid
-    #     movie_id = prediction.iid
-    #     predicted_list.append((user_id,movie_id,round(predicted_rating,2)))
+    predicted_list = []
+    for prediction in predictions:
+        actual_rating = prediction.r_ui
+        predicted_rating = prediction.est
+        user_id = prediction.uid
+        movie_id = prediction.iid
+        predicted_list.append((user_id,movie_id,round(predicted_rating,2)))
 
-    # user_predicted_list = [(movie_id,predicted_rating) for (user_id,movie_id,predicted_rating) in predicted_list if user_id == selected_user_id]
-    # user_predicted_list = sorted(user_predicted_list, key=lambda x: x[1],reverse = True)
-    # #print(user_predicted_list[0:5])
+    user_predicted_list = [(movie_id,predicted_rating) for (user_id,movie_id,predicted_rating) in predicted_list if user_id == selected_user_id]
+    user_predicted_list = sorted(user_predicted_list, key=lambda x: x[1],reverse = True)
+    #print(user_predicted_list[0:5])
 
-    # best_movies = user_predicted_list[0:5]
-    # movie_ids = [up[0] for up in best_movies]
-    # st.header(f'Top 5 Recommended Movies for user {selected_user_id}')
-    # idx = 1
-    # for movie_id,pred_rating in (best_movies) :
-    #   movie_info = movies.loc[movies['movieId'] == movie_id][['title']].values
-    #   #pred_rating = round(pred_rating,2)
-    #   st.markdown(f"**{idx}. Movie Name: {movie_info[0][0]}, Predicted Rating: {pred_rating}**")
-    #   idx+=1
+    best_movies = user_predicted_list[0:5]
+    movie_ids = [up[0] for up in best_movies]
+    st.header(f'Top 5 Recommended Movies for user {selected_user_id}')
+    idx = 1
+    for movie_id,pred_rating in (best_movies) :
+      movie_info = movies.loc[movies['movieId'] == movie_id][['title']].values
+      #pred_rating = round(pred_rating,2)
+      st.markdown(f"**{idx}. Movie Name: {movie_info[0][0]}, Predicted Rating: {pred_rating}**")
+      idx+=1
 
-    # st.header(f'Performance Analysis for {selected_user_id}')
+    st.header(f'Performance Analysis for {selected_user_id}')
 
-    # threshold = st.number_input("Set the rating threshold for a good movie:", min_value=1, max_value=5, value=3, step=1)
+    threshold = st.number_input("Set the rating threshold for a good movie:", min_value=1, max_value=5, value=3, step=1)
 
-    # avg_error, conf_matrix, precision, recall, f1 = error_analysis(test_df,user_predicted_list,selected_user_id,threshold)
+    avg_error, conf_matrix, precision, recall, f1 = error_analysis(test_df,user_predicted_list,selected_user_id,threshold)
 
-    # st.markdown(f"**The average error is {avg_error}**")
+    st.markdown(f"**The average error is {avg_error}**")
 
-    # st.markdown(f"**The precision is {precision}**")
-    # st.markdown(f"**The recall is {recall}**")
-    # plt.figure(figsize=(4, 2))
-    # sns.heatmap(conf_matrix, annot=True, fmt="d", cmap="Blues", linewidths=.5)
-    # plt.xlabel("Predicted")
-    # plt.ylabel("Actual")
-    # plt.title("Confusion Matrix")
-    # st.pyplot()
+    st.markdown(f"**The precision is {precision}**")
+    st.markdown(f"**The recall is {recall}**")
+    plt.figure(figsize=(4, 2))
+    sns.heatmap(conf_matrix, annot=True, fmt="d", cmap="Blues", linewidths=.5)
+    plt.xlabel("Predicted")
+    plt.ylabel("Actual")
+    plt.title("Confusion Matrix")
+    st.pyplot()
 
 
 
