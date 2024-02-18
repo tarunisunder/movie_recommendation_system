@@ -10,10 +10,15 @@ import seaborn as sns
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
 
-from google.colab import drive
+# from google.colab import drive
 
-movies_data =  '/content/drive/MyDrive/tens_challenge/movies.csv'
-ratings_data =  '/content/drive/MyDrive/tens_challenge/ratings.csv'
+# movies_data =  '/content/drive/MyDrive/tens_challenge/movies.csv'
+# ratings_data =  '/content/drive/MyDrive/tens_challenge/ratings.csv'
+
+
+movies_data =  'https://raw.githubusercontent.com/tarunisunder/movie_recommendation_system/main/movies.csv'
+ratings_data =  'https://raw.githubusercontent.com/tarunisunder/movie_recommendation_system/main/ratings.csv'
+
 
 movies = pd.read_csv(movies_data)
 ratings = pd.read_csv(ratings_data)
