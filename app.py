@@ -139,9 +139,9 @@ def error_analysis(test_df,user_predicted_list,selected_user_id,threshold):
   conf_matrix = confusion_matrix(user_actual_rating['ratingBool'] , user_actual_rating['predictedBool'] , labels = [False , True])
 
 
-  precision = precision_score(actual, predicted)
-  recall = recall_score(actual, predicted)
-  f1 = f1_score(actual, predicted)
+  precision = round(precision_score(actual, predicted),2)
+  recall = round(recall_score(actual, predicted),2)
+  f1 = round(f1_score(actual, predicted),2)
 
   return avg_error, conf_matrix, precision, recall, f1
 
