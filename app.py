@@ -1,4 +1,3 @@
-%%writefile app.py
 from surprise import Dataset, Reader, KNNBasic, accuracy
 from surprise.model_selection import train_test_split
 import pandas as pd
@@ -9,12 +8,6 @@ import streamlit as st
 import inspect
 import seaborn as sns
 st.set_option('deprecation.showPyplotGlobalUse', False)
-
-
-#from google.colab import drive
-
-#movies_data =  '/content/drive/MyDrive/tens_challenge/movies.csv'
-#ratings_data =  '/content/drive/MyDrive/tens_challenge/ratings.csv'
 
 
 movies_data =  'https://raw.githubusercontent.com/tarunisunder/movie_recommendation_system/main/movies.csv'
