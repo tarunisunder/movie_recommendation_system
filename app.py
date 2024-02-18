@@ -7,7 +7,7 @@ from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_
 import streamlit as st
 import inspect
 import seaborn as sns
-import plotly.express as px
+
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
@@ -55,22 +55,14 @@ def data_overview():
   movie_rating.rename(columns={'mean': 'average_rating', 'size': 'num_ratings'}, inplace=True)
   st.dataframe(movie_rating.head())
 
-  # plt.figure(figsize=(10, 4))
+  plt.figure(figsize=(10, 4))
   # sns.histplot(ratings['rating'].tolist(), bins=10)
-  # #plt.hist(ratings['rating'], bins=10)
-  # plt.title('Distribution of Ratings')
-  # plt.xlabel('Ratings')
-  # plt.ylabel('Frequency')
-  # st.pyplot()
+  plt.hist(ratings['rating'], bins=10)
+  plt.title('Distribution of Ratings')
+  plt.xlabel('Ratings')
+  plt.ylabel('Frequency')
+  st.pyplot()
 
-  
-  fig = px.histogram(ratings, x='rating', nbins=10, title='Distribution of Ratings', labels={'rating': 'Ratings', 'count': 'Frequency'})
-    
-  # Set the figure size
-  fig.update_layout(width=800, height=400)
-
-  # Use st.plotly_chart to display the Plotly figure in Streamlit
-  st.plotly_chart(fig)
 
 
 
