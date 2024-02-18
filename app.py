@@ -81,6 +81,8 @@ def create_train_test():
     temp2_df = ratings[ratings['userId'] == k].iloc[:,:3].tail(int(v))
     st.dataframe(temp_df.head())
     train_df= train_df.append(temp_df,ignore_index=True)
+    st.write("After append")
+    st.dataframe(train_df.head())
     test_df = test_df.append(temp2_df, ignore_index = True)
 
 
