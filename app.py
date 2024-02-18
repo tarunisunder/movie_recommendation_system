@@ -209,26 +209,40 @@ def recommendation_main():
     plt.title("Confusion Matrix")
     st.pyplot()
 
+def authenticate(username, password):
+    # Hardcoded username and password for simplicity (replace with a secure authentication method)
+    valid_username = "user"
+    valid_password = "password"
+    return username == valid_username and password == valid_password
 
+def login():
+    st.title("Login Page")
+    username = st.text_input("Username:")
+    password = st.text_input("Password:", type="password")
+    login_button = st.button("Login")
 
-
-
-
-
+    if login_button:
+        if authenticate(username, password):
+            st.success("Login successful!")
+            return True
+        else:
+            st.error("Invalid username or password. Please try again.")
+    return False
 
 def main() :
-    page = st.sidebar.selectbox("Select a page", ["Data", "Train Test", "Recommendation Abstract", "Recommendation Demo"])
-    if page == "Data":
-        data_overview()
-
-    elif page =='Train Test' :
-        display_code_widget()
-
-    elif page == 'Recommendation Abstract':
-        recommendation_abstract()
-
-    elif page == "Recommendation Demo" :
-        recommendation_main()
+  if login():
+      page = st.sidebar.selectbox("Select a page", ["Data", "Train Test", "Recommendation Abstract", "Recommendation Demo"])
+      if page == "Data":
+          data_overview()
+  
+      elif page =='Train Test' :
+          display_code_widget()
+  
+      elif page == 'Recommendation Abstract':
+          recommendation_abstract()
+  
+      elif page == "Recommendation Demo" :
+          recommendation_main()
 
 
 if __name__ == '__main__':
