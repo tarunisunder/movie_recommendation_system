@@ -20,6 +20,16 @@ ratings = pd.read_csv(ratings_data)
 
 def data_overview():
 
+  try:
+    response = requests.get("https://www.google.com")
+    if response.status_code == 200:
+        st.success("Internet access is available.")
+    else:
+        st.warning("Internet access might be limited or unavailable.")
+  except Exception as e:
+    st.error(f"An error occurred: {e}")
+
+
   st.title('Movie Recommendation System')
   st.subheader('Taruni Sunder')
   st.title('Data Overview')
