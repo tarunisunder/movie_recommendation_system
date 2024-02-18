@@ -128,7 +128,7 @@ def error_analysis(test_df,user_predicted_list,selected_user_id,threshold):
   user_actual_rating = test_df[(test_df['userId'] == selected_user_id)  ]
   user_actual_rating = pd.merge(user_actual_rating, user_predicted_df , on =['movieId'])
   user_actual_rating['diff'] = abs(user_actual_rating['rating'] - user_actual_rating['predicted_rating'])
-  avg_error = user_actual_rating['diff'].sum() / len(user_actual_rating)
+  avg_error = round(user_actual_rating['diff'].sum() / len(user_actual_rating),2)
 
   user_actual_rating['ratingBool'] = (user_actual_rating['rating'] > threshold).astype(int)
   user_actual_rating['predictedBool'] = (user_actual_rating['predicted_rating'] > threshold).astype(int)
@@ -201,6 +201,7 @@ def recommendation_main():
 
     st.markdown(f"**The precision is {precision}**")
     st.markdown(f"**The recall is {recall}**")
+    st.markdown(f"**The f1 score is {f1}**")
     plt.figure(figsize=(4, 2))
     sns.heatmap(conf_matrix, annot=True, fmt="d", cmap="Blues", linewidths=.5)
     plt.xlabel("Predicted")
