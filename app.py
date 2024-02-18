@@ -234,7 +234,7 @@ def login():
   
 
 def main() :
-  login():
+  login()
   if st.session_state.authenticated:
       page = st.sidebar.selectbox("Select a page", ["Data", "Train Test", "Recommendation Abstract", "Recommendation Demo"])
       if page == "Data":
