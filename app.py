@@ -54,8 +54,8 @@ def data_overview():
   st.dataframe(movie_rating.head())
 
   plt.figure(figsize=(10, 4))
-  # sns.histplot(ratings['rating'], bins=10)
-  plt.hist(ratings['rating'], bins=10)
+  sns.histplot(ratings['rating'], bins=10)
+  #plt.hist(ratings['rating'], bins=10)
   plt.title('Distribution of Ratings')
   plt.xlabel('Ratings')
   plt.ylabel('Frequency')
