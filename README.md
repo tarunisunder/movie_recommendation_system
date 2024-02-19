@@ -22,7 +22,9 @@ Ratings - User Id, Movie Id, Rating and Timestamp.
     recommendations". Using the predicted and actual ratings and this threshold, we calculate the metrics. eg: If the movie was rated 2, and 
     the predicted rating is 4 and the threshold was 3, we would count that as a false positive.
     This page also has precision ,recall, f1 score, and the confusion matrix.
-   
+
+
+   NOTE : To login username :user, password : password
 
 
 
