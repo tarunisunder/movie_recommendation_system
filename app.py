@@ -72,9 +72,6 @@ def create_train_test():
   total_dict = ratings['userId'].value_counts().to_dict()
   train_dict = {key: value / 2 for key, value in total_dict.items()}
 
-  # train_df = pd.DataFrame(columns = ['userId', 'movieId', 'rating'])
-  # test_df = pd.DataFrame(columns = ['userId', 'movieId', 'rating'])
-
   train_df_list = []
   test_df_list = []
 
