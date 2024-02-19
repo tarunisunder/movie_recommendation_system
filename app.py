@@ -78,9 +78,6 @@ def create_train_test():
   for (k,v) in train_dict.items() :
     temp_df = ratings[ratings['userId'] == k].iloc[:,:3].head(int(v))
     temp2_df = ratings[ratings['userId'] == k].iloc[:,:3].tail(int(v))
-    # train_df= train_df.append(temp_df,ignore_index=True)
-    # test_df = test_df.append(temp2_df, ignore_index = True)
-
     train_df_list.append(temp_df)
     test_df_list.append(temp2_df)
 
@@ -233,8 +230,8 @@ def login():
 def main() :
   login()
   if st.session_state.authenticated:
-      page = st.sidebar.selectbox("Select a page", ["Data", "Train Test", "Recommendation Abstract", "Recommendation Demo"])
-      if page == "Data":
+      page = st.sidebar.selectbox("Select a page", ["Data Overview", "Creating Train and Test sets", "Recommendation Abstract", "Recommendation Demo"])
+      if page == "Data Overview":
           data_overview()
   
       elif page =='Train Test' :
