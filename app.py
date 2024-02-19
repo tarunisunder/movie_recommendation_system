@@ -220,8 +220,7 @@ def login():
         st.session_state.authenticated = False
 
     if not st.session_state.authenticated:
-        st.title("Welcome to the Movie Recommendation System")
-        st.header("Login Page")
+        st.title("Welcome")
         username = st.text_input("Username:")
         password = st.text_input("Password:", type="password")
         login_button = st.button("Login")
