@@ -191,7 +191,7 @@ def recommendation_main():
       st.markdown(f"**{idx}. Movie Name: {movie_info[0][0]}, Predicted Rating: {pred_rating}**")
       idx+=1
 
-    st.header(f'Performance Analysis for {selected_user_id}')
+    st.header(f'Performance Analysis for user {selected_user_id}')
 
     threshold = st.number_input("Set the rating threshold for a good movie:", min_value=1, max_value=5, value=3, step=1)
 
