@@ -23,7 +23,6 @@ ratings = pd.read_csv(ratings_data)
 def data_overview():
 
   st.title('Movie Recommendation System')
-  st.subheader('Taruni Sunder')
   st.title('Data Overview')
   st.header('Movies Data')
   st.dataframe(movies.head())
@@ -234,7 +233,7 @@ def main() :
       if page == "Data Overview":
           data_overview()
   
-      elif page =='Train Test' :
+      elif page =='Creating Train and Test sets' :
           display_code_widget()
   
       elif page == 'Recommendation Abstract':
