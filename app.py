@@ -113,7 +113,7 @@ def display_code_widget():
 def recommendation_abstract():
   st.title('Recommendation Abstract')
 
-  st.write("Collaborative Filtering with KNNBasic in a movie recommendation system involves finding similar users or items based on historical preferences. The algorithm uses a K-Nearest Neighbors approach to identify the K most similar users to the target user. Cosine similarity quantifies the resemblance between users.. The algorithm then predicts a user's rating for a movie based on the ratings of their similar users and recommends movies with the highest predicted ratings. KNNBasic is part of the Surprise library and can operate in both user-based and item-based collaborative filtering modes.")
+  st.write("Collaborative Filtering with KNNBasic in a movie recommendation system involves finding similar users or items based on historical preferences. The algorithm uses a K-Nearest Neighbors approach to identify the K most similar users to the target user. Cosine similarity quantifies the resemblance between users. The algorithm then predicts a user's rating for a movie based on the ratings of their similar users and recommends movies with the highest predicted ratings. KNNBasic is part of the Surprise library and can operate in both user-based and item-based collaborative filtering modes.")
 
 
 def error_analysis(test_df,user_predicted_list,selected_user_id,threshold):
@@ -137,6 +137,10 @@ def error_analysis(test_df,user_predicted_list,selected_user_id,threshold):
   f1 = round(f1_score(actual, predicted),2)
 
   return avg_error, conf_matrix, precision, recall, f1
+
+
+def feature_enchancements():
+  st.markdown("The principle used to recommend movies is collaborative filtering. As such, there are no explicit features created. The algorithm works by creating a user similarity matrix, and then recommending movies that similar users watched. User similarity is determined by the similarity in their movie ratings. ")
 
 
 
@@ -229,13 +233,16 @@ def login():
 def main() :
   login()
   if st.session_state.authenticated:
-      page = st.sidebar.selectbox("Select a page", ["Data Overview", "Creating Train and Test sets", "Recommendation Abstract", "Recommendation Demo"])
+      page = st.sidebar.selectbox("Select a page", ["Data Overview", "Creating Train and Test sets", "Feature Enchancements", "Recommendation Abstract", "Recommendation Demo"])
       if page == "Data Overview":
           data_overview()
   
       elif page =='Creating Train and Test sets' :
           display_code_widget()
-  
+
+      elif page== "Feature Enhancements" :
+          feature_enchancements()
+          
       elif page == 'Recommendation Abstract':
           recommendation_abstract()
   
