@@ -140,7 +140,8 @@ def error_analysis(test_df,user_predicted_list,selected_user_id,threshold):
 
 
 def feature_enchancements():
-  st.markdown("The principle used to recommend movies is collaborative filtering. As such, there are no explicit features created. The algorithm works by creating a user similarity matrix, and then recommending movies that similar users watched. User similarity is determined by the similarity in their movie ratings. ")
+  st.title('Feature Enhancements')
+  st.write("The principle used to recommend movies is collaborative filtering. As such, there are no explicit features created. The algorithm works by creating a user similarity matrix, and then recommending movies that similar users watched. User similarity is determined by the similarity in their movie ratings. ")
 
 
 
@@ -233,7 +234,7 @@ def login():
 def main() :
   login()
   if st.session_state.authenticated:
-      page = st.sidebar.selectbox("Select a page", ["Data Overview", "Creating Train and Test sets", "Feature Enchancements", "Recommendation Abstract", "Recommendation Demo"])
+      page = st.sidebar.selectbox("Select a page", ["Data Overview", "Creating Train and Test sets", "Feature Enhancements", "Recommendation Abstract", "Recommendation Demo"])
       if page == "Data Overview":
           data_overview()
   
